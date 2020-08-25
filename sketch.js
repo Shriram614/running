@@ -4,9 +4,9 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 const Render = Matter.Render;
-var dustbinObj, paperObject,groundObject	
+var dustbinObj, paperObject,groundObject ;	
 var world;
-
+var gameState=0;
 
 function setup() {
 	createCanvas(displayWidth-20,displayHeight-100);
@@ -44,7 +44,7 @@ function setup() {
 function draw() {
   rectMode(CENTER);
   background(255);
- 
+ if(gameState === 0){
   dustbinObj.display();
   paperObject.display();
   groundObject.display();
@@ -53,14 +53,22 @@ function draw() {
   
   
  
-}
+
 
 function keyPressed() {
   	if (keyCode === UP_ARROW) {
 
     	Matter.Body.applyForce(paperObject.body,paperObject.body.position,{x:75,y:-85});
-    
-  	}
+    gameState=1;
+	  }
+	}
+}
+if(gameState === 1){
+	
+	textSize(8);
+	fill("red");
+	text("you win",200,200);
+}
 }
 
 
